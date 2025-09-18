@@ -13,16 +13,23 @@ namespace ej
             ModalDatos fDatos = new ModalDatos();
             if (fDatos.ShowDialog() == DialogResult.OK)
             {
-                string nombre = fDatos.tbP.Text;
-                Persona p = null;
-                if (fDatos.radioButton1.Checked)
+                try
                 {
-                    p = new Persona(nombre);
+                    string nombre = fDatos.tbP.Text;
+                    Persona p = null;
+                    if (fDatos.radioButton1.Checked)
+                    {
+                        p = new Persona(nombre);
+                    }
+                    else if (fDatos.radioButton2.Checked)
+                    {
+                        string cuit = fDatos.tbPJuridica.Text;
+                        p = new PersonaJuridica(nombre, cuit);
+                    }
                 }
-                else if(fDatos.radioButton2.Checked)
+                catch (FormatoCUITNoValidoException ex) 
                 {
-                    string cuit = fDatos.tbPJuridica.Text;
-                    p = new PersonaJuridica(nombre,cuit);
+                    fDatos.
                 }
                 if (p != null)
                 {
